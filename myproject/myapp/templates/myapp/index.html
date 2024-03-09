@@ -1,0 +1,42 @@
+{% extends 'myapp/base.html' %}
+{% load embed_video_tags %}
+{% load humanize %}
+{% block content %}
+
+{% for p in products %}
+<div class="card mb-3" style="max-width: 1200px;">
+  <div class="row g-0">
+     <div>
+       {% if p.initiator.image %}
+         <img width="50" src="{{ p.initiator.image.url }}" class="mr-3 rounded-circle" alt="Please,download your photo">
+       {% else %}
+         <i class="fa-regular fa-user"></i>
+       {% endif %}
+        {{ p.initiator.first_name }}
+     </div>
+    <hr>
+    <div class="col-md-4">
+      {% video p.video '400x250' %}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+      {% for t in p.tags.all %}
+        <a href="{{ t.get_absolute_url }}">#{{ t.title }}</a>
+      {% endfor %}
+        <h5 class="card-title">{{ p.title }}</h5>
+        <p class="card-text">{{ p.content }}</p>
+        <p class="card-text"><small class="text-body-secondary">{{ p.time_created|naturaltime }}</small></p>
+      </div>
+      {% if request.user.is_authenticated %}
+        <button type="button" class="btn btn-outline-secondary"><a href="{% url 'comment_add' p.id %}"><i class="fa-regular fa-comment"></i></a></button>
+        <button type="button" class="btn btn-outline-info"><a href="{% url 'favorite_add' p.id %}"><i class="fa-regular fa-bookmark %}"></i></a></button>
+      {% else %}
+        <button type="button" class="btn btn-outline-secondary"><a href="{% url 'register' %}"><i class="fa-regular fa-comment"></i></a></button>
+        <button type="button" class="btn btn-outline-info"><a href="{% url 'register' %}"><i class="fa-regular fa-bookmark"></i></a></button>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}

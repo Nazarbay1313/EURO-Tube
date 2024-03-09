@@ -1,0 +1,36 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title text-center">{{ title }}</h5>
+        </div>
+        <div class="card-body">
+          <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              {% if user.image %}
+                <img width="250" src="{{ user.image.url }}" class="mr-3 rounded-circle" alt="Please,download your photo">
+              {% else %}
+                <i class="fa-regular fa-user"></i>
+              {% endif %}
+                <br>
+               {% csrf_token %}
+               <div class="form-error">{{ form.non_field_errors }}</div>
+               {% for f in form %}
+               <label class="form-label" for="{{ f.id_for_label }}">{{ f.label }} </label>{{ f }}
+               <div class="form-error">{{ f.errors }}</div>
+               {% endfor %}
+            </div>
+              <br>
+            <button type="submit" class="btn btn-primary btn-block">Обновить</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

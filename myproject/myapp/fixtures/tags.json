@@ -1,0 +1,1 @@
+[{"model": "myapp.tag", "pk": 1, "fields": {"title": "автомобили", "slug": "avto"}}, {"model": "myapp.tag", "pk": 2, "fields": {"title": "новости", "slug": "news"}}, {"model": "myapp.tag", "pk": 3, "fields": {"title": "технологии", "slug": "technologies"}}, {"model": "myapp.tag", "pk": 4, "fields": {"title": "развитие", "slug": "progress"}}]

@@ -1,0 +1,45 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title text-center">{{ title }}</h5>
+        </div>
+        <div class="card-body">
+          <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <br>
+               {% csrf_token %}
+               {% for f in form %}
+               <label class="form-label" for="{{ f.id_for_label }}">{{ f.label }} </label>{{ f }}
+               {% endfor %}
+            </div>
+              <br>
+            <button type="submit" class="btn btn-primary btn-block">Отправить</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% for c in product.comment_set.all %}
+<div class="media mb-4">
+    {% if c.user.image %}
+        <img class="d-flex mr-3 rounded-circle" width="50px" src="{{ c.user.image.url }}" alt="">
+    {% else %}
+        <i class="fa-regular fa-user"></i>
+    {% endif %}
+        <div class="media-body">
+          <h5 class="mt-0">{{ c.user.first_name }}</h5>
+          {{ c.content }}
+            <hr>
+        </div>
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'myapp/base.html' %}
+{% load embed_video_tags %}
+{% block content %}
+
+{% if favorites %}
+<h3>{{ title }}</h3>
+{% for f in favorites %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card">
+        {% video f.product.video '405x200' %}
+      <div class="card-body">
+        <h5 class="card-title">{{ f.product.title}}</h5>
+        <p class="card-text">{{ f.product.content }}</p>
+        <a href="{% url 'favorite_delete' f.id %}">Удалить</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% else %}
+<h5 class="card-title text-center">Вкладка пуста</h5>
+{% endif %}
+
+{% endblock %}
