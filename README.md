@@ -45,7 +45,7 @@ python manage.py loaddata myapp/fixtures/products.json
 ```bash
 redis-cli ping
 ```
-A little about online anonymous chat:
+*A little about online anonymous chat:
 Monitor the operation of the websocket by watching the console. When connecting to the room, the corresponding command HANDSHAKING and then CONNECT will be displayed. If you leave the room, the connection is immediately interrupted, and you will see the corresponding DISCONNECT response in the console.
 
 ```bash
