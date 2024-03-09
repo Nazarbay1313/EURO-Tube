@@ -1,9 +1,10 @@
 import os
 
-# 👇 1. Update the below import lib
-from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.security.websocket import AllowedHostsOriginValidator
+# 👇 1. Update the below import lib
+from django.core.asgi import get_asgi_application
+
 from myapp.routing import websocket_urlpatterns
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
